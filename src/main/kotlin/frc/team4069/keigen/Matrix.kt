@@ -35,6 +35,10 @@ open class Matrix<R: `100`, C: `100`>(private val rows: Nat<R>, private val cols
 
     operator fun minus(value: Matrix<R, C>) = Matrix(rows, cols, storage.minus(value.storage))
 
+    operator fun plus(value: Double) = Matrix(rows, cols, storage.plus(value))
+
+    operator fun plus(value: Matrix<R, C>) = Matrix(rows, cols, storage.plus(value.storage))
+
     operator fun div(value: Int) = Matrix(rows, cols, storage.divide(value.toDouble()))
 
     operator fun div(value: Double) = Matrix(rows, cols, storage.divide(value))
