@@ -24,25 +24,25 @@ object mat {
 }
 
 object vec {
-    operator fun <D : `100`> get(dim: Nat<D>, vararg data: Double): Vector<D> {
+    operator fun <D : `100`> get(dim: Nat<D>, vararg data: Double): Matrix<D, `1`> {
         if (data.size != dim.i) {
             throw IllegalArgumentException("Invalid number of elements for ${dim.i}-dimensional vector. got ${data.size} elements")
         }
 
-        return Vector(dim, SimpleMatrix(dim.i, 1, false, data))
+        return Matrix(dim, `1`, SimpleMatrix(dim.i, 1, false, data))
     }
 
-    operator fun <D : `100`> get(dim: Nat<D>, vararg data: Int): Vector<D> {
+    operator fun <D : `100`> get(dim: Nat<D>, vararg data: Int): Matrix<D, `1`> {
         if (data.size != dim.i) {
             throw IllegalArgumentException("Invalid number of elements for ${dim.i}-dimensional vector. got ${data.size} elements")
         }
 
-        return Vector(dim, SimpleMatrix(dim.i, 1, false, data.map { it.toDouble() }.toDoubleArray()))
+        return Matrix(dim, `1`, SimpleMatrix(dim.i, 1, false, data.map { it.toDouble() }.toDoubleArray()))
     }
 }
 
 fun <R: `100`, C: `100`> zeros(rows: Nat<R>, cols: Nat<C>) = Matrix(rows, cols, SimpleMatrix(rows.i, cols.i))
-fun <D: `100`> zeros(size: Nat<D>) = Vector(size, SimpleMatrix(size.i, 1))
+fun <D: `100`> zeros(size: Nat<D>) = Matrix(size, `1`, SimpleMatrix(size.i, 1))
 
 fun <D: `100`> eye(size: Nat<D>) = Matrix(size, size, SimpleMatrix.identity(size.i))
 
@@ -51,10 +51,10 @@ fun <R: `100`, C: `100`> ones(rows: Nat<R>, cols: Nat<C>): Matrix<R, C> {
     CommonOps_DDRM.fill(out.ddrm, 1.0)
     return Matrix(rows, cols, out)
 }
-fun <D: `100`> ones(size: Nat<D>): Vector<D> {
+fun <D: `100`> ones(size: Nat<D>): Matrix<D, `1`> {
     val out = SimpleMatrix(size.i, 1)
     CommonOps_DDRM.fill(out.ddrm, 1.0)
 
-    return Vector(size, out)
+    return Matrix(size, `1`, out)
 }
 

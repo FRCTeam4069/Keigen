@@ -4,7 +4,7 @@ import org.ejml.dense.row.CommonOps_DDRM
 import org.ejml.dense.row.NormOps_DDRM
 import org.ejml.simple.SimpleMatrix
 
-open class Matrix<R: `100`, C: `100`>(private val rows: Nat<R>, private val cols: Nat<C>, protected val storage: SimpleMatrix) {
+open class Matrix<R: `100`, C: `100`>(private val rows: Nat<R>, private val cols: Nat<C>, internal val storage: SimpleMatrix) {
     val numCols get() = cols.i
 
     val numRows get() = rows.i
