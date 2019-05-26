@@ -16,6 +16,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     compile("org.ejml:ejml-all:0.37")
+    testCompile("junit:junit:4.12")
 }
 
 tasks.withType<KotlinCompile> {
