@@ -4,7 +4,7 @@ import org.ejml.dense.row.CommonOps_DDRM
 import org.ejml.dense.row.NormOps_DDRM
 import org.ejml.simple.SimpleMatrix
 
-open class Matrix<R: `100`, C: `100`>(private val rows: Nat<R>, private val cols: Nat<C>, internal val storage: SimpleMatrix) {
+open class Matrix<R: `50`, C: `50`>(private val rows: Nat<R>, private val cols: Nat<C>, internal val storage: SimpleMatrix) {
     val numCols get() = cols.i
 
     val numRows get() = rows.i
@@ -20,7 +20,7 @@ open class Matrix<R: `100`, C: `100`>(private val rows: Nat<R>, private val cols
     fun minInternal() = CommonOps_DDRM.elementMin(this.storage.ddrm)
     fun mean() = elementSum() / storage.numElements.toDouble()
 
-    operator fun <C2: `100`> times(other: Matrix<C, C2>): Matrix<R, C2>
+    operator fun <C2: `50`> times(other: Matrix<C, C2>): Matrix<R, C2>
         = Matrix(rows, other.cols, this.storage.mult(other.storage))
 
     operator fun times(value: Double): Matrix<R, C>
