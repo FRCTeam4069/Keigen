@@ -2,11 +2,11 @@ package frc.team4069.keigen
 
 import org.ejml.simple.SimpleMatrix
 
-fun <R : `50`, C : `50`> mat(rows: Nat<R>, cols: Nat<C>) = MatBuilder(rows, cols)
+fun <R : Num, C : Num> mat(rows: Nat<R>, cols: Nat<C>) = MatBuilder(rows, cols)
 
-fun <D : `50`> vec(dim: Nat<D>) = VecBuilder(dim)
+fun <D : Num> vec(dim: Nat<D>) = VecBuilder(dim)
 
-class MatBuilder<R : `50`, C : `50`>(val rows: Nat<R>, val cols: Nat<C>) {
+class MatBuilder<R : Num, C : Num>(val rows: Nat<R>, val cols: Nat<C>) {
     fun fill(vararg data: Double): Matrix<R, C> {
         if (data.size != rows.i * cols.i) {
             throw IllegalArgumentException("Invalid matrix data provided. Wanted ${rows.i} x ${cols.i} matrix, but got ${data.size} elements")
@@ -26,7 +26,7 @@ class MatBuilder<R : `50`, C : `50`>(val rows: Nat<R>, val cols: Nat<C>) {
     }
 }
 
-class VecBuilder<D : `50`>(val dim: Nat<D>) {
+class VecBuilder<D : Num>(val dim: Nat<D>) {
     fun fill(vararg data: Double): Vector<D> {
         if (data.size != dim.i) {
             throw IllegalArgumentException("Invalid number of elements for ${dim.i}-dimensional vector. got ${data.size} elements")
@@ -42,11 +42,4 @@ class VecBuilder<D : `50`>(val dim: Nat<D>) {
 
         return Matrix(dim, `1`, SimpleMatrix(dim.i, 1, false, data.map { it.toDouble() }.toDoubleArray()))
     }
-}
-
-
-fun x() {
-    vec(`2`).fill(1.0, 2.0)
-
-    mat(`2`, `2`).fill(1, 2, 3, 4)
 }
