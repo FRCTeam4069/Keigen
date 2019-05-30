@@ -13,7 +13,7 @@ class MatBuilder<R : Num, C : Num>(val rows: Nat<R>, val cols: Nat<C>) {
         }
 
         val matData = data.toList().chunked(cols.i).map { it.toDoubleArray() }.toTypedArray()
-        return Matrix(rows, cols, SimpleMatrix(matData))
+        return Matrix(SimpleMatrix(matData))
     }
 
     fun fill(vararg data: Int): Matrix<R, C> {
@@ -22,7 +22,7 @@ class MatBuilder<R : Num, C : Num>(val rows: Nat<R>, val cols: Nat<C>) {
         }
 
         val matData = data.map { it.toDouble() }.chunked(cols.i).map { it.toDoubleArray() }.toTypedArray()
-        return Matrix(rows, cols, SimpleMatrix(matData))
+        return Matrix(SimpleMatrix(matData))
     }
 }
 
@@ -32,7 +32,7 @@ class VecBuilder<D : Num>(val dim: Nat<D>) {
             throw IllegalArgumentException("Invalid number of elements for ${dim.i}-dimensional vector. got ${data.size} elements")
         }
 
-        return Matrix(dim, `1`, SimpleMatrix(dim.i, 1, false, data))
+        return Matrix(SimpleMatrix(dim.i, 1, false, data))
     }
 
     fun fill(vararg data: Int): Vector<D> {
@@ -40,6 +40,6 @@ class VecBuilder<D : Num>(val dim: Nat<D>) {
             throw IllegalArgumentException("Invalid number of elements for ${dim.i}-dimensional vector. got ${data.size} elements")
         }
 
-        return Matrix(dim, `1`, SimpleMatrix(dim.i, 1, false, data.map { it.toDouble() }.toDoubleArray()))
+        return Matrix(SimpleMatrix(dim.i, 1, false, data.map { it.toDouble() }.toDoubleArray()))
     }
 }

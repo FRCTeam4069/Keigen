@@ -43,4 +43,12 @@ class MatrixTest {
 
         Assert.assertTrue(MatrixFeatures_DDRM.isEquals(targetVec.storage.ddrm, res.storage.ddrm))
     }
+
+    @Test
+    fun testMatNumColRow() {
+        val m = mat(`2`, `3`).fill(1, 2, 3, 4, 5, 6)
+
+        Assert.assertEquals(m.numRows, 2)
+        Assert.assertEquals(m.numCols, 3)
+    }
 }
